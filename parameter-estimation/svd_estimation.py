@@ -205,7 +205,7 @@ def matlabInterface(avgOP, rank):
     #os.system('matlab -nodesktop -nosplash -nojvm -r "matlab_svd ' + out_loc + " %s"%rank + '"')
     os.system('octave --no-gui --quiet --eval "matlab_svd ' + out_loc + " %s"%rank + '"')
     os.chdir(pwd)
-    mat_return = io.loadmat(out_loc)
+    mat_return = io.loadmat(out_loc + ".mat")
     return mat_return['U'].newbyteorder('='), mat_return['S'].newbyteorder('='), mat_return['V'].newbyteorder('=')
 
 '''
