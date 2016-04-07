@@ -7,8 +7,8 @@ also in this repository, and was generously provided by Dan Gildea.  It is also 
 
 ## System Requirements
 - NumPy (at least v1.6) and SciPy (at least v0.13)
-- a relatively recent vereion of `cdec` ([link](https://github.com/redpony/cdec) which includes `pycdec`.
-- MATLAB for fast SVD computation
+- a relatively recent vereion of [cdec](https://github.com/redpony/cdec), which includes `pycdec`.
+- Matlab or Octave for fast SVD computation
 
 In addition, a valid C++ compiler is needed to compile the grammar extractor.  
 
@@ -149,7 +149,7 @@ python scripts/corpus2sgm.py outDirForDecoratedGrammars < test_sentences_escaped
 
 ## Things to add
 
-- add SciPy SVD computation as an option to those who do not have access to MATLAB
+- add SciPy SVD computation as an option to those who do not have access to Matlab
 - option to output inside and outside probability vectors as features in addition or instead of the rule marginal features
 - finish adding support for real-valued features
 
