@@ -35,7 +35,7 @@ Input: parallel sentence corpus (tokenized, lower-cased). Assume all code is run
    $CDEC/word-aligner/fast_align -i filtered_corpus_out -d -v -o > fwd_align
    $CDEC/word-aligner/fast_align -i filtered_corpus_out -d -v -o -r > rev_align
    $CDEC/utils/atools -i fwd_align -j rev_align -c grow-diag-final-and > align.gdfa
-   python -m cdec.sa.compile -b filtered_corpus_out -align.gdfa -c extract.ini -o training.sa
+   python -m cdec.sa.compile -b filtered_corpus_out -a align.gdfa -c extract.ini -o training.sa
    ```
 
 2. Preprocess word alignments to format that minimal rule extractor can take in.
@@ -108,7 +108,7 @@ Input: parallel sentence corpus (tokenized, lower-cased). Assume all code is run
   3. EM estimation:
 
    ```
-   parameter-estimation/em_estimation.py minrule.full.grammar/ <rank> numIterations outDirForParameters scaling
+   parameter-estimation/em_estimation.py minrule.full.grammar/ <rank> <numIterations> outDirForParameters scaling
    ```
 
    The scaling argument is used so that we don't underflow, and should be set to something reasonably high (e.g., 10^5 or 10^6). Flags:
