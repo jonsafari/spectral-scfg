@@ -44,7 +44,7 @@ Input: parallel sentence corpus (tokenized, lower-cased). Assume all code is run
    python minrule-extraction/preproc_minrule_input.py < align.gdfa > minrule.input
    ```
 
-3. Run minimal rule extraction.
+3. Run minimal rule extraction. Don't forget to compile the ZGC-extractor first.
 
    ```
    ZGC-extractor/rc < minrule.input > minrule.log 2> minrule.output
@@ -68,7 +68,7 @@ Input: parallel sentence corpus (tokenized, lower-cased). Assume all code is run
 6. As an additional step to make the grammar compatible with `cdec`, you need to featurize the minimal rules and write it all out in one large grammar. 
 
    ```
-   python minrule-extraction/featurize_rules.py minrule.hiero.grammar/ minimal.featurized.grammar.gz counts-file training.sa/bilex.bin numProcesses
+   python minrule-extraction/featurize_rules.py minrule.hiero.grammar/ minimal.featurized.grammar.gz counts-file training.sa/bilex.bin <numProcesses>
    ```
 
    Flags:
@@ -120,7 +120,7 @@ Input: parallel sentence corpus (tokenized, lower-cased). Assume all code is run
 8. To decode an evaluation set (make sure it has also been preprocessed to escape special characters), run the parser with the estimated parameters.
 
    ```
-   python parser/compute_hg.py -f parameters <rank> test_sentences_escaped numProcesses outDirForPerSentenceGrammars
+   python parser/compute_hg.py -f parameters <rank> test_sentences_escaped <numProcesses> outDirForPerSentenceGrammars
    ```
 
    Flags:
@@ -134,7 +134,7 @@ Input: parallel sentence corpus (tokenized, lower-cased). Assume all code is run
 9. After decoding, the per-sentence grammars need to be decorated with other common MT features for effective performance in an MT system. 
 
    ```
-   python minrule-extraction/featurize_rules.py -m outDirForPerSentenceGrammars/ outDirForDecoratedGrammars/ counts-file training.sa/bilex.bin numProcesses
+   python minrule-extraction/featurize_rules.py -m outDirForPerSentenceGrammars/ outDirForDecoratedGrammars/ counts-file training.sa/bilex.bin <numProcesses>
    ```
 
    Flags:
