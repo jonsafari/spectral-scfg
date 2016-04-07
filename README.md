@@ -68,7 +68,7 @@ Input: parallel sentence corpus (tokenized, lower-cased). Assume all code is run
 6. As an additional step to make the grammar compatible with `cdec`, you need to featurize the minimal rules and write it all out in one large grammar. 
 
    ```
-   python minrule-extraction/featurize_rules.py minrule.hiero.grammar/ minimal.featurized.grammar.gz counts-file training.sa/lex.bin numProcesses
+   python minrule-extraction/featurize_rules.py minrule.hiero.grammar/ minimal.featurized.grammar.gz counts-file training.sa/bilex.bin numProcesses
    ```
 
    Flags:
@@ -82,7 +82,7 @@ Input: parallel sentence corpus (tokenized, lower-cased). Assume all code is run
   1. SVD-based estimation:
 
    ```
-   python parameter-estimation/svd_estimation.py minrule.entire.grammar/ feature_list rank parameters > training.rules.with.rowIdxs
+   python parameter-estimation/svd_estimation.py minrule.full.grammar/ feature_list <rank> parameters > training.rules.with.rowIdxs
    ```
 
    Flags (rule indicator features always used):
@@ -98,7 +98,7 @@ Input: parallel sentence corpus (tokenized, lower-cased). Assume all code is run
   2. MLE estimation:
 
    ```
-   python parameter-estimation/svd_estimation.py -m minrule.entire.grammar/ dummy 1 mle.parameters > training.rules.with.rowIdxs
+   python parameter-estimation/svd_estimation.py -m minrule.full.grammar/ dummy 1 mle.parameters > training.rules.with.rowIdxs
    ```
 
    Flags: 
@@ -108,7 +108,7 @@ Input: parallel sentence corpus (tokenized, lower-cased). Assume all code is run
   3. EM estimation:
 
    ```
-   parameter-estimation/em_estimation.py minrule.entire.grammar/ rank numIterations outDirForParameters scaling
+   parameter-estimation/em_estimation.py minrule.full.grammar/ <rank> numIterations outDirForParameters scaling
    ```
 
    The scaling argument is used so that we don't underflow, and should be set to something reasonably high (e.g., 10^5 or 10^6). Flags:
@@ -120,7 +120,7 @@ Input: parallel sentence corpus (tokenized, lower-cased). Assume all code is run
 8. To decode an evaluation set (make sure it has also been preprocessed to escape special characters), run the parser with the estimated parameters.
 
    ```
-   python parser/compute_hg.py -f parameters rank test_sentences_escaped numProcesses outDirForPerSentenceGrammars
+   python parser/compute_hg.py -f parameters <rank> test_sentences_escaped numProcesses outDirForPerSentenceGrammars
    ```
 
    Flags:
@@ -134,7 +134,7 @@ Input: parallel sentence corpus (tokenized, lower-cased). Assume all code is run
 9. After decoding, the per-sentence grammars need to be decorated with other common MT features for effective performance in an MT system. 
 
    ```
-   python minrule-extraction/featurize_rules.py -m outDirForPerSentenceGrammars/ outDirForDecoratedGrammars/ counts-file training.sa/lex.bin numProcesses
+   python minrule-extraction/featurize_rules.py -m outDirForPerSentenceGrammars/ outDirForDecoratedGrammars/ counts-file training.sa/bilex.bin numProcesses
    ```
 
    Flags:
