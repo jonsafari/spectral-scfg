@@ -108,9 +108,10 @@ Input: parallel sentence corpus (tokenized, lower-cased). Assume all code is run
   3. EM estimation:
 
    ```
-   parameter-estimation/em_estimation.py minrule.full.grammar/ <rank> <numIterations> outDirForParameters scaling
+   parameter-estimation/em_estimation.py minrule.full.grammar/ <rank> <numIterations> outDirForParameters <scaling>
    ```
 
+   The original paper used 50 iterations.
    The scaling argument is used so that we don't underflow, and should be set to something reasonably high (e.g., 10^5 or 10^6). Flags:
      - `-o`: whether to do OOV estimation or not; like svd_estimation.py, OOV estimation here is based on singletons (recommended)
      - `-f X`: filter rules, need to provide as an argument a dictionary of parameters where the rules are already filtered
