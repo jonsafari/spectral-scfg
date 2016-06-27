@@ -7,14 +7,15 @@ also in this repository, and was generously provided by Dan Gildea.  It is also 
 
 ## System Requirements
 - NumPy (at least v1.6) and SciPy (at least v0.13)
-- a relatively recent vereion of [cdec](https://github.com/redpony/cdec), which includes `pycdec`.
-- Matlab or Octave for fast SVD computation
+- A relatively recent vereion of [cdec](https://github.com/redpony/cdec), which includes `pycdec`.
+- Matlab or Octave for SVD computation
 
 In addition, a valid C++ compiler is needed to compile the grammar extractor.  
 
 ## Prerequisites
 
 - Compiled version of `cdec` along with compiled Python extensions (see [here](http://www.cdec-decoder.org/guide/compiling.html) for instructions).  Make sure the location of the `pycdec` files is in your `$PYTHONPATH` environment variable. 
+  You might need to use cdec commit afd65846c , then build cdec (which needs boost-program-options and boost-serialization), build pycdec, then run: `python setup.py install --user`
 - Compiled version of the minimal grammar extractor (see instructions within `ZGC-extractor` sub-directory for more information)
 
 ## End-to-end Pipeline Instructions
