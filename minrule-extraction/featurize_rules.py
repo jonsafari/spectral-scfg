@@ -238,6 +238,9 @@ def main():
     outFile_loc = args[1]
     countDict = cPickle.load(open(args[2], 'rb')) #load counts for feature computation
     lex_model = args[3]
+    if not os.path.isfile(lex_model):
+        sys.stderr.write("Error: file '%s' not found\n" % lex_model)
+        sys.exit(1)
     numProcesses = int(args[4])
     
     minRule_grammars = os.listdir(minRule_grammars_loc)
