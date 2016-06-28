@@ -408,6 +408,8 @@ def main():
         filteredRules = cPickle.load(open(optsDict["filter"], 'rb'))
     numIters = int(args[2])
     outDir = args[3]
+    if not os.path.exists(outDir):
+        os.makedirs(outDir)
     start = time.clock()
     start_iter = start
     for iterNum in range(0, numIters):        
