@@ -61,6 +61,8 @@ rank = int(args[1])
 inputFile = open(args[2], 'r').readlines()
 numProcesses = int(args[3])
 outDir = args[4]
+if not os.path.exists(outDir):
+    os.makedirs(outDir)
 
 '''
 declaration of list that maintains which sentences have failed across all processes
