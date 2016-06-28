@@ -28,7 +28,7 @@ Lastly, included an additional option flag to generate heat maps of the parse ch
 Usage: python compute_hg.py (-d/-f/-n/-m/-s/-t) params rank input_sentences numProc outDir/
 '''
 
-import sys, commands, string, time, gzip, cPickle, re, getopt, math, hg_io
+import sys, os, commands, string, time, gzip, cPickle, re, getopt, math, hg_io
 import multiprocessing as mp
 import pylab as plt
 import matplotlib as mpl
